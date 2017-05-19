@@ -14,7 +14,7 @@ def is_permutation(s1, s2):
     lc2 = {}    # Letter count for 's2' (character count)
 
     # Populate dictionaries 'lc1' and 'lc2'
-    for i in range (len(s1)):
+    for i in range(len(s1)):
         l1 = s1[i]
         l2 = s2[i]
 
