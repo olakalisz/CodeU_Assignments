@@ -9,6 +9,8 @@ class Q2Test(unittest.TestCase):
     list = Assignment1_q2.SinglyLinkedList()
     with self.assertRaises(IndexError):
         list.get_from_last(1)
+    with self.assertRaises(IndexError):
+        list.get_from_last(0)
 
   def testKnownCases(self):
     # Create a list with elements from 1 to 4 with 4 as head of the list

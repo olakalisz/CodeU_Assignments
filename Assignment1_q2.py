@@ -30,7 +30,6 @@ class SinglyLinkedList(object):
         new_node.set_next_node(self.__head)
         self.__head = new_node
 
-
     def get_from_last(self, k):
         """Get kth to the last node of the list - assignment question
         (The idea is to have two pointers, both set to head at the start
