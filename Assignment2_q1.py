@@ -48,7 +48,7 @@ def print_ancestors(tree, key):
 
 def get_ancestors_recursive(tree, key):
     """Returns a list of all the ancestors of the key in the given binary tree.
-       Ancestors contain the key itself. Method used recursively, adds one ancestors at a time.
+       Ancestors contain the key itself. Method used recursively, adds one ancestor at a time.
 
         Args:
             tree: a binary tree, tree to check for ancestors, no duplicated keys allowed
