@@ -25,7 +25,7 @@ def print_ancestors(tree, key):
             ValueError: if the given tree is empty
             KeyError: if the given tree does not contain the key
     """
-    # Throw an error if the tree is empty
+    # Raise an error if the tree is empty
     if tree is None:
         raise ValueError("Empty tree!")
 
@@ -55,7 +55,7 @@ def get_ancestors_recursive(tree, key):
             key: a key type in a given tree, a key for the ancestors to be printed
 
         Returns:
-            a list of key type, list of the ancestors of the key and prints ancestors
+            a list of key type, list of the ancestors of the key
     """
     # Base case
     if tree is None:
@@ -65,12 +65,12 @@ def get_ancestors_recursive(tree, key):
     left_subtree = tree.get_left()
     right_subtree = tree.get_right()
 
-    # If the key is in the root, print the root and add it to ancestor list
+    # If the key is in the root, return the root
     if tree.get_value() == key:
         return [tree.get_value()]
 
-    # If the key is in either left of right subtree of the node, print the node
-    # and add it to the ancestor list. Recursive call, works similar to dfs.
+    # If the key is in either left of right subtree of the node, add it to the ancestor list
+    # which is returned. Recursive call, works similar to dfs.
     if (get_ancestors_recursive(left_subtree, key)
             or get_ancestors_recursive(right_subtree, key)):
         left_ancestors = get_ancestors_recursive(left_subtree, key)

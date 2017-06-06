@@ -22,20 +22,20 @@ def lowest_common_ancestor(tree, key1, key2):
         Returns:
             a key type in the given tree, the lowest common ancestor of two nodes in the tree
 
-        Throws:
+        Raises:
             ValueError: if the given tree is empty
             KeyError: if any of two nodes given by key is not contained in a tree
     """
-    # Throw an error if the tree is empty
+    # Raise an error if the tree is empty
     if tree is None:
         raise ValueError("Empty tree!")
 
-    # Throw an error if the first node given by key is not contained in a tree
+    # Raise an error if the first node given by key is not contained in a tree
     node1_ancestors = get_ancestors_recursive(tree, key1)
     if not node1_ancestors:
         raise KeyError("The first key given is not in the tree!")
 
-    # Throw an error if the second node given by key is not contained in a tree
+    # Raise an error if the second node given by key is not contained in a tree
     node2_ancestors = get_ancestors_recursive(tree, key2)
     if not node2_ancestors:
         raise KeyError("The second key given is not in the tree!")
