@@ -1,6 +1,9 @@
 class TreeNode(object):
-    """TreeNode is a unit which is used in my implementation of Binary Tree."""
-
+    """My implementation of Binary Tree. TreeNode is a unit which is used in
+       my implementation of Binary Tree and each TreeNode is a tree itself.
+       There is no insert() method as I assumed that tree will be created in
+       a bottom-up fashion. The 'top' node is the root. None corresponds
+       to empty tree."""
     def __init__(self, value=None, left=None, right=None):
         self.__value = value
         self.__left = left
@@ -20,14 +23,3 @@ class TreeNode(object):
 
     def set_right(self, child):
         self.__right = child
-
-
-class BinaryTree(object):
-    """My implementation of Binary Tree. There is no insert() method as I assumed that tree
-       will be created in a bottom-up fashion."""
-
-    def __init__(self, root=None):
-        self.__root = root
-
-    def get_root(self):
-        return self.__root
