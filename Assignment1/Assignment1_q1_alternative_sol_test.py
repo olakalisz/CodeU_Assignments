@@ -1,12 +1,14 @@
 """Tests for question 1 - permutation, alternative solution."""
 
-import Assignment1_q1_alternative_sol
 import unittest
+
+import Assignment1_q1_alternative_sol
+
 
 class Q1Test(unittest.TestCase):
 
   def testEdgeCases(self):
-    self.assertEquals(True, Assignment1_q1_alternative_sol.is_permutation("",""))
+    self.assertEquals(True, Assignment1_q1_alternative_sol.is_permutation("", ""))
     self.assertEquals(False, Assignment1_q1_alternative_sol.is_permutation("a", ""))
     self.assertEquals(False, Assignment1_q1_alternative_sol.is_permutation("", "a"))
 

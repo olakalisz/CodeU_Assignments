@@ -1,7 +1,9 @@
 """Tests for question 2 - kth from last element (node) of the list."""
 
-import Assignment1_q2
 import unittest
+
+import Assignment1_q2
+
 
 class Q2Test(unittest.TestCase):
 
