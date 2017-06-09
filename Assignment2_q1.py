@@ -29,8 +29,7 @@ def print_ancestors(tree, key):
     if tree is None:
         raise ValueError("Empty tree!")
 
-    # Call the helper recursive method and pass an empty list of ancestors as last argument.
-    # (Empty list - base case)
+    # Call the helper recursive method to get list of ancestors
     ancestors = get_ancestors_recursive(tree, key)
 
     # If the list returned by recursive method is empty it implies the tree does not contain
@@ -61,24 +60,23 @@ def get_ancestors_recursive(tree, key):
     if tree is None:
         return []
 
+    # If the key is in the root, return the root
+    if tree.get_value() == key:
+        return [key]
+
     # Get left and right subtree from the node for the recursive call.
     left_subtree = tree.get_left()
     right_subtree = tree.get_right()
 
-    # If the key is in the root, return the root
-    if tree.get_value() == key:
-        return [tree.get_value()]
-
     # If the key is in either left of right subtree of the node, add it to the ancestor list
     # which is returned. Recursive call, works similar to dfs.
-    if (get_ancestors_recursive(left_subtree, key)
-            or get_ancestors_recursive(right_subtree, key)):
-        left_ancestors = get_ancestors_recursive(left_subtree, key)
-        if left_ancestors:
-            return left_ancestors + [tree.get_value()]
-        else:
-            right_ancestors = get_ancestors_recursive(right_subtree, key)
-            return right_ancestors + [tree.get_value()]
+    left_ancestors = get_ancestors_recursive(left_subtree, key)
+    if left_ancestors:
+        return left_ancestors + [tree.get_value()]
+
+    right_ancestors = get_ancestors_recursive(right_subtree, key)
+    if right_ancestors:
+        return right_ancestors + [tree.get_value()]
 
     # Otherwise return empty list
     return []

@@ -41,17 +41,24 @@ def lowest_common_ancestor(tree, key1, key2):
         raise KeyError("The second key given is not in the tree!")
 
     # Find the lowest common ancestor given two lists of ancestors.
-    # Set two index pointers to the last element of the lists of ancestors of two nodes.
-    i = len(node1_ancestors) - 1
-    j = len(node2_ancestors) - 1
+    # Set an index pointer to the first element of the list of ancestors of two nodes.
+    i = 0
 
-    # Loop from the end of two lists until the first node with different key values
-    # in the lists is found. (The first node - root should always be the same)
-    while i >= 0 and j >= 0:
-        if node1_ancestors[i] != node2_ancestors[j]:
+    # Find the longer ans shorter node list and difference in their length
+    if len(node1_ancestors) > len(node2_ancestors):
+        longer_ancestors = node1_ancestors
+        shorter_ancestors = node2_ancestors
+    else:
+        longer_ancestors = node2_ancestors
+        shorter_ancestors = node1_ancestors
+    len_diff = len(longer_ancestors) - len(shorter_ancestors)
+
+    # Loop through the lists until the first element in common is found.
+    # (The first node - root should always be the same)
+    while i < len(shorter_ancestors):
+        if shorter_ancestors[i] == longer_ancestors[i+len_diff]:
             break
-        i -= 1
-        j -= 1
+        i += 1
 
     # Return the last key value of the node that was the same in two ancestor lists.
-    return node1_ancestors[i+1]
+    return shorter_ancestors[i]
