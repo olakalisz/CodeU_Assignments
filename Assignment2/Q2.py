@@ -7,7 +7,7 @@
 
 
 from BinaryTree import TreeNode
-from Assignment2_q1 import get_ancestors_recursive
+from Q1 import get_ancestors_recursive
 
 
 def lowest_common_ancestor(tree, key1, key2):

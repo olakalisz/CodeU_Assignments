@@ -2,13 +2,13 @@
 
 import unittest
 
-import Assignment1_q2
+import Q2
 
 
 class Q2Test(unittest.TestCase):
 
   def testEmptyCase(self):
-    list = Assignment1_q2.SinglyLinkedList()
+    list = Q2.SinglyLinkedList()
     with self.assertRaises(IndexError):
         list.get_from_last(1)
     with self.assertRaises(IndexError):
@@ -16,7 +16,7 @@ class Q2Test(unittest.TestCase):
 
   def testKnownCases(self):
     # Create a list with elements from 1 to 4 with 4 as head of the list
-    list = Assignment1_q2.SinglyLinkedList()
+    list = Q2.SinglyLinkedList()
     for i in range(1,5):
         list.insert_first(i)
     self.assertEquals(1, list.get_from_last(0).get_data())
@@ -27,7 +27,7 @@ class Q2Test(unittest.TestCase):
 
   def testErrorCases(self):
     # Create a list with elements from 1 to 4 with 4 as head of the list
-    list = Assignment1_q2.SinglyLinkedList()
+    list = Q2.SinglyLinkedList()
     for i in range(1, 5):
         list.insert_first(i)
     with self.assertRaises(ValueError):
