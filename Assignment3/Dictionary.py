@@ -9,15 +9,15 @@ class Dictionary:
         for i in range(len(word_list)):
             word_list[i] = word_list[i].upper()
         # Initialise dictionary's word list
-        self.__word_list = word_list
+        self.__word_list = set(word_list)
 
         # Populate dictionary's prefix list based on the given word list
-        self.__prefix_list = []
+        self.__prefix_list = set()
         for word in self.__word_list:
-            for i in range(len(word)):
+            for i in range(1, len(word)):
                 prefix = word[:i]
                 if prefix not in self.__prefix_list:
-                    self.__prefix_list.append(prefix)
+                    self.__prefix_list.add(prefix)
 
     def isWord(self, word):
         word = word.upper()

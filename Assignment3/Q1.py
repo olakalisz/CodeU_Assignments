@@ -10,7 +10,7 @@
 from Dictionary import Dictionary
 
 # An array to keep track of adjacent entries in a grid.
-_ADJACENT_DELTAS = [(-1,-1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+_ADJACENT_DELTAS = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
 
 def is_not_visited(i, j, rows, columns, visited):
@@ -38,7 +38,7 @@ def word_search(grid, dictionary):
 
         Returns:
             a set of strings (all uppercase), complete set of words that can be formed from grid's characters and
-            are in a dictionary, there are no duplicated words in a set.
+            are in a dictionary.
     """
     # Calculate the number of rows and columns in a grid.
     rows = len(grid)
