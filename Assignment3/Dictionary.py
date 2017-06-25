@@ -15,7 +15,7 @@ class Dictionary:
         self.__prefix_list = []
         for word in self.__word_list:
             for i in range(len(word)):
-                prefix = word[:i+1]
+                prefix = word[:i]
                 if prefix not in self.__prefix_list:
                     self.__prefix_list.append(prefix)
 

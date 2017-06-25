@@ -9,9 +9,12 @@
 
 from Dictionary import Dictionary
 
+# An array to keep track of adjacent entries in a grid.
+_ADJACENT_DELTAS = [(-1,-1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+
 
 def is_not_visited(i, j, rows, columns, visited):
-    """A method checks if an entry with coordinates (i,j) is contained in a grid and weather it is still not visited.
+    """A method checks if an entry with coordinates (i,j) is contained in a grid and whether it is not yet visited.
 
         Args:
             i: an integer, first coordinate of an entry
@@ -34,15 +37,15 @@ def word_search(grid, dictionary):
             dictionary: a Dictionary object, contains the words to search for in a grid
 
         Returns:
-            a list of words (all uppercase), complete list of words that can be formed from grid's characters and
-            are in a dictionary, there are no duplicated words in a list.
+            a set of strings (all uppercase), complete set of words that can be formed from grid's characters and
+            are in a dictionary, there are no duplicated words in a set.
     """
     # Calculate the number of rows and columns in a grid.
     rows = len(grid)
     columns = len(grid[0])
 
-    # Instantiate a list of words.
-    word_list = []
+    # Instantiate a set of words.
+    found_words = set()
 
     # For each entry in a grid perform a search from this grid entry to find all the words starting with the
     # corresponding character in a grid.
@@ -57,20 +60,16 @@ def word_search(grid, dictionary):
             start = (row, column)
 
             # Call a recursive-DFS-like function from the entry
-            word_search_recursive(dictionary, grid, visited, start, word_list)
-
-    # For consistency we always return uppercase words (makes testing easier)
-    for i in range(len(word_list)):
-        word_list[i] = word_list[i].upper()
+            word_search_recursive(dictionary, grid, visited, start, found_words)
 
     # Return a set of words found in a grid and contained in a dictionary.
-    return word_list
+    return set(found_words)
 
 
-def word_search_recursive(dictionary, grid, visited, start, word_list, prefix=""):
+def word_search_recursive(dictionary, grid, visited, start, found_words, prefix=""):
     """This method works similar to DFS from vertex on a graph but here our grid is a 'graph', 'vertices' are the grid
-       entries and 'edges' are between every two adjacent grid entries. The search checks ALL paths from the 'vertex'
-       to find all the words that can be formed from a grid and are contained in a dictionary.
+       entries and 'edges' are between every two adjacent grid entries. The search checks ALL paths from the 'start
+       vertex' to find all the words that can be formed from a grid and are contained in a dictionary.
 
         Args:
             dictionary: a Dictionary object, contains the words to search for in a grid
@@ -79,14 +78,10 @@ def word_search_recursive(dictionary, grid, visited, start, word_list, prefix=""
                      visited by the search the corresponding 'visited entry' is set to True and otherwise it is set to
                      False
             start: a pair of integers, the entry ('vertex') we start our search from
-            word_list: a list of strings, list of words that can be formulated from a character grid and are
-                       in a dictionary
+            found_words: a set of strings, at the start found_words contains all the words that have been found
+                         so far in a grid, the method adds to found_words any words it finds in search
             prefix: a string, contains a word 'accumulated' so far, in a recursive call prefix is modify in order
                     to perform a DFS search, we terminate early if isPrefix(string) on a current prefix returns False
-
-        Returns:
-            it is a void function, no value is returned but the function modifies its word_list argument which
-            accumulates the words found in a grid.
     """
     # Get coordinates of the starting entry in a search.
     (i, j) = start
@@ -97,29 +92,25 @@ def word_search_recursive(dictionary, grid, visited, start, word_list, prefix=""
     # Indicate that the entry has been visited by search.
     visited[i][j] = True
 
+    # Add a word to word list if it is a word in a dictionary. Do not allow duplicates in a list of words.
+    # Make each word uppercase fo consistency.
+    if dictionary.isWord(prefix) and prefix not in found_words:
+        found_words.add(prefix.upper())
+
     # Early terminate - cut off the search tree branch if the prefix so far is not a prefix in a dictionary.
     if dictionary.isPrefix(prefix):
-        # Add a word to word list if it is a word in a dictionary.
-        if dictionary.isWord(prefix):
-            # Do not allow duplicates in a list of words.
-            if prefix not in word_list:
-                word_list += [prefix]
 
         # Get rows and columns of a grid.
         rows = len(grid)
         columns = len(grid[0])
 
-        # Two arrays to keep track of adjacent entries.
-        rows_adjacent = [-1, -1, -1, 0, 0, 1, 1, 1]
-        columns_adjacent = [-1, 0, 1, -1, 1, -1, 0, 1]
-
         # Recursive call, DFS-like search but searches ALL paths from an entry
         # Iterating through the two arrays above and using 'is_not_visited' method all
         # adjacent entries are found.
-        for k in range(8):
-            adjacent = (i+rows_adjacent[k], j+columns_adjacent[k])
+        for (row_delta, column_delta) in _ADJACENT_DELTAS:
+            adjacent = (i + row_delta, j + column_delta)
             if is_not_visited(adjacent[0], adjacent[1], rows, columns, visited):
-                word_search_recursive(dictionary, grid, visited, adjacent, word_list, prefix)
+                word_search_recursive(dictionary, grid, visited, adjacent, found_words, prefix=prefix)
 
     # When a single search is finished reset an visited entry back to False.
     visited[i][j] = False
