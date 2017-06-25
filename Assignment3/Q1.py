@@ -94,7 +94,7 @@ def word_search_recursive(dictionary, grid, visited, start, found_words, prefix=
 
     # Add a word to word list if it is a word in a dictionary. Do not allow duplicates in a list of words.
     # Make each word uppercase fo consistency.
-    if dictionary.isWord(prefix) and prefix not in found_words:
+    if dictionary.isWord(prefix) and prefix.upper() not in found_words:
         found_words.add(prefix.upper())
 
     # Early terminate - cut off the search tree branch if the prefix so far is not a prefix in a dictionary.
