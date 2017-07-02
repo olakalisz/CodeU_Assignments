@@ -32,12 +32,12 @@ class Q1Test(unittest.TestCase):
 
     def testNoIslandsCase(self):
         """Tests the case when there are no islands in a map grid"""
-        no_islands_map = [[False for i in range(5)] for j in range(7)]
+        no_islands_map = [[False for _ in range(5)] for _ in range(7)]
         self.assertEquals(0, Q1.counting_islands(no_islands_map))
 
     def testAllLandCase(self):
         """Tests the case when all map tiles are land"""
-        all_land_map = [[True for i in range(10)] for j in range(4)]
+        all_land_map = [[True for _ in range(10)] for _ in range(4)]
         self.assertEquals(1, Q1.counting_islands(all_land_map))
 
     def testKnownCases(self):

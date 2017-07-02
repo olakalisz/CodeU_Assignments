@@ -10,13 +10,12 @@
 _ADJACENT_DELTAS = [(-1, 0), (0, -1), (0, 1), (1, 0)]
 
 
-def is_not_visited_land(i, j, visited, map_grid):
-    """The method checks if a map entry (tile) with coordinates (i,j) is contained in a gird, is not yet visited and
+def is_not_visited_land(tile, visited, map_grid):
+    """The method checks if a map entry (tile) with coordinates (i,j) is contained in a grid, is not yet visited and
        is a land tile.
 
         Args:
-            i: an integer, first coordinate of an entry (tile)
-            j: an integer, second coordinate of an entry (tile)
+            tile: a pair of integers, coordinates of the entry (tile) for which the check is performed
             visited: a 2D boolean array, indicates which entries (tiles) has already been visited
             map_grid: a 2D boolean array, corresponds to the map grid, indicates with True the land tiles and
                       water tiles with False
@@ -24,8 +23,12 @@ def is_not_visited_land(i, j, visited, map_grid):
         Returns:
             a boolean, True if an entry is in a grid, has not been visited yet and is a land tile.
     """
+    # Get the number of rows and columns in a grid.
     rows = len(map_grid)
     columns = len(map_grid[0])
+
+    # Get the coordinates of the entry (tile).
+    (i, j) = tile
     return 0 <= i < rows and 0 <= j < columns and not visited[i][j] and map_grid[i][j]
 
 
@@ -39,16 +42,15 @@ def counting_islands(map_grid):
         Returns:
             an integer, the number of islands in a given map grid.
     """
-    # Get the number of rows and columns in in a grid.
+    # Get the number of rows and columns in a grid.
     rows = len(map_grid)
     columns = len(map_grid[0])
 
-    # Instantiate the number of islands to 0.
     island_count = 0
 
     # Instantiate a 2D boolean array 'visited' corresponding to the map grid to all False entries. It will indicate
     # what tiles has been already visited by the search.
-    visited = [[False for i in range(columns)] for j in range(rows)]
+    visited = [[False for _ in range(columns)] for _ in range(rows)]
 
     # Iterate through all map grid tiles and perform a DFS 'island' search whenever a land tile is found.
     for i in range(rows):
@@ -84,5 +86,5 @@ def dfs_explore_island(start, visited, map_grid):
     for (row_delta, column_delta) in _ADJACENT_DELTAS:
         # Get the coordinates of an adjacent entry (tile).
         adjacent = (i + row_delta, j + column_delta)
-        if is_not_visited_land(adjacent[0], adjacent[1], visited, map_grid):
+        if is_not_visited_land(adjacent, visited, map_grid):
             dfs_explore_island(adjacent, visited, map_grid)
