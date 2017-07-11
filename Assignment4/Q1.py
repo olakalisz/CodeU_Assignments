@@ -50,14 +50,14 @@ def counting_islands(map_grid):
 
     # Instantiate a 2D boolean array 'visited' corresponding to the map grid to all False entries. It will indicate
     # what tiles has been already visited by the search.
-    visited = [[False for _ in range(columns)] for _ in range(rows)]
+    visited = [[False] * columns for _ in range(rows)]
 
     # Iterate through all map grid tiles and perform a DFS 'island' search whenever a land tile is found.
     for i in range(rows):
         for j in range(columns):
-            if not visited[i][j] and map_grid[i][j]:
-                start = (i, j)
-                dfs_explore_island(start, visited, map_grid)
+            tile = (i, j)
+            if is_not_visited_land(tile, visited, map_grid):
+                dfs_explore_island(tile, visited, map_grid)
                 island_count += 1
 
     # Return the number of islands.
