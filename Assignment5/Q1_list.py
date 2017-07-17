@@ -100,7 +100,7 @@ def initialize_state_dictionary(dictionary) :
     return state
 
 
-def find_total_order_from_char(partial_order, state, char, total_order):
+def find_total_order_from_char(partial_order, state, char, reversed_total_order):
     """This method is the recursive part of topological sort (Similar to DFS from vertex).
 
         Args:
@@ -108,8 +108,8 @@ def find_total_order_from_char(partial_order, state, char, total_order):
             state: a dictionary of character keys and integer values, where integers indicate state of the
                    character ("vertex")
             char: a character, from which the search is performed
-            total_order: a singly linked list of characters, the total order (lexicographical order) "accumulated
-                         so far" the new character is always added at the front of the list.
+            reversed_total_order: an array of characters, the reversed total order (lexicographical order) "accumulated
+                         so far" the new character is always added at the back of the list.
     """
     # The character is in search now.
     state[char] = _GREY
@@ -118,7 +118,7 @@ def find_total_order_from_char(partial_order, state, char, total_order):
     for following_char in partial_order[char]:
         # Perform a search from this character if it has not been visited yet.
         if state[following_char] == _WHITE:
-            find_total_order_from_char(partial_order, state, following_char, total_order)
+            find_total_order_from_char(partial_order, state, following_char, reversed_total_order)
         # If any searched characters are found here, we found a cycle in the order, i.e. it is not a correct ordering.
         elif state[following_char] == _GREY:
             raise ValueError("The given dictionary is not sorted in lexicographical order!")
@@ -127,7 +127,7 @@ def find_total_order_from_char(partial_order, state, char, total_order):
     state[char] = _BLACK
 
     # Update the total order (alphabet).
-    total_order.insert_first(char)
+    reversed_total_order.append(char)
 
 
 def find_ordered_alphabet(dictionary):
@@ -153,19 +153,16 @@ def find_ordered_alphabet(dictionary):
     # Instantiate states to _WHITE for all characters
     state = initialize_state_dictionary(dictionary)
 
-    # Initialize the singly linked list. It will contain the total order of characters "accumulated so far".
-    total_order = SinglyLinkedList.SinglyLinkedList()
+    # Initialize the reversed list of characters. It will contain the reversed total order of characters
+    # "accumulated so far".
+    reversed_total_order = []
 
     # Perform a topological sort.
     for char in partial_order:
         if state[char] == _WHITE:
-            find_total_order_from_char(partial_order, state, char, total_order)
+            find_total_order_from_char(partial_order, state, char, reversed_total_order)
 
-    # Copy values from singly linked list to array of characters in order.
-    ordered_alphabet = []
-    current_char_node = total_order.get_head()
-    while current_char_node is not None:
-        ordered_alphabet.append(current_char_node.get_data())
-        current_char_node = current_char_node.get_next_node()
+    # Get the topological order (alphabet) from reversed list i.e. reverse the list.
+    reversed_total_order.reverse()
 
-    return ordered_alphabet
+    return reversed_total_order
