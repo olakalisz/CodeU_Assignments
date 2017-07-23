@@ -7,18 +7,20 @@ from Move import Move
 
 
 def rearrange_cars(start_positions, desired_positions, print_sequence=False):
-    """The method finds a move sequence that will change cars' layout on the parking from start positions to desired
+    """
+    The method finds a move sequence that will change cars' layout on the parking from start positions to desired
        positions.
 
         Args:
-            start_positions: a list of integers, indicates the initial locations (layout) of cars on the parking
-            desired_positions: a list of integers, indicates the desired locations (layout) of cars on the parking
-            print_sequence: a boolean, indicates whether the move sequence should should be formatted and printed
-                            (useful to disable it for testing)
+            start_positions:    a list of integers, indicates the initial locations (layout) of cars on the parking
+            desired_positions:  a list of integers, indicates the desired locations (layout) of cars on the parking
+            print_sequence:     a boolean, indicates whether the move sequence should should be formatted and printed
+                                (useful to disable it for testing)
 
         Returns:
             a list of Move objects, indicates the sequence of moves that will move the cars on the parking
-            from initial layout to the desired one"""
+            from initial layout to the desired one.
+    """
     moves = []
     # Copy start_position array so that we do not change it in place. (Makes testing easier)
     current_positions = list(start_positions)
@@ -38,7 +40,8 @@ def rearrange_cars(start_positions, desired_positions, print_sequence=False):
 
 
 def create_position_map(current_positions):
-    """The method creates a dictionary which assigns each car its current position.
+    """
+    The method creates a dictionary which assigns each car its current position.
 
         Args:
             current_positions: a list of integers, indicates the current locations (layout) of cars on the parking
@@ -55,16 +58,17 @@ def create_position_map(current_positions):
 
 
 def set_single_spot(spot, current_positions, position_map, desired_positions, moves):
-    """The method sets a 'desired car' on the spot passed as an argument.
+    """
+    The method sets a 'desired car' on the spot passed as an argument.
        It uses the maximum of two moves to set the car.
 
         Args:
-            spot: an integer, the parking space we want to set the car on
-            current_positions: a list of integers, indicates the current locations (layout) of cars on the parking
-            position_map: a dictionary mapping integers to integers, cars' numbers are keys and cars' position on the
-                          parking are values
-            desired_positions: a list of integers, indicates the desired locations (layout) of cars on the parking
-            moves: a list of Move objects, sequence of the moves 'done so far'
+            spot:               an integer, the parking space we want to set the car on
+            current_positions:  a list of integers, indicates the current locations (layout) of cars on the parking
+            position_map:       a dictionary mapping integers to integers, cars' numbers are keys and cars' position on the
+                                parking are values
+            desired_positions:  a list of integers, indicates the desired locations (layout) of cars on the parking
+            moves:              a list of Move objects, sequence of the moves 'done so far'
     """
     current_car = current_positions[spot]
     desired_car = desired_positions[spot]
@@ -86,16 +90,17 @@ def set_single_spot(spot, current_positions, position_map, desired_positions, mo
 
 
 def make_move(car, start_spot, end_spot, current_positions, position_map, moves):
-    """The method 'performs' a move, i.e. adds move to the move list and updates all position data structures.
+    """
+    The method 'performs' a move, i.e. adds move to the move list and updates all position data structures.
 
         Args:
-            car: an integer, indicates a car on a parking
-            start_spot: an integer, the space where the move 'begins'
-            end_spot: an integer, the space where the move 'ends'
-            current_positions: a list of integers, indicates the current locations (layout) of cars on the parking
-            position_map: a list of integers, indicates the mapping of cars to their positions. List index is
-                          corresponding to a car and the value is car's position
-            moves: a list of Move objects, sequence of the moves 'done so far'
+            car:                an integer, indicates a car on a parking
+            start_spot:         an integer, the space where the move 'begins'
+            end_spot:           an integer, the space where the move 'ends'
+            current_positions:  a list of integers, indicates the current locations (layout) of cars on the parking
+            position_map:       a list of integers, indicates the mapping of cars to their positions. List index is
+                                corresponding to a car and the value is car's position
+            moves:              a list of Move objects, sequence of the moves 'done so far'
     """
     moves.append(Move(start_spot, end_spot))
     position_map[0] = start_spot

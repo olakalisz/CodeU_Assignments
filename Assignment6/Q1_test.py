@@ -12,11 +12,12 @@ _NUMBER_OF_CARS_TO_PERMUTE = 5
 
 
 def _apply_moves(current_positions, moves):
-    """The method applies a sequence of moves to the given cars' layout on the parking and returns the resulting layout.
+    """
+    The method applies a sequence of moves to the given cars' layout on the parking and returns the resulting layout.
 
         Args:
-            current_positions: an array of integers, indicates the current locations (layout) of cars on the parking
-            moves: an array of Move objects, indicates how the cars are supposed to be moved.
+            current_positions:  an array of integers, indicates the current locations (layout) of cars on the parking
+            moves:              an array of Move objects, indicates how the cars are supposed to be moved.
 
         Returns:
             a list of integers, indicates the resulting cars' layout after the sequence of moves is applied.
@@ -29,14 +30,15 @@ def _apply_moves(current_positions, moves):
 
 
 def _test_result(start_positions, desired_positions):
-    """The method verifies the correctness of the move sequence to rearrange cars and checks the number of moves.
+    """
+    The method verifies the correctness of the move sequence to rearrange cars and checks the number of moves.
 
         Args:
-            start_positions: a list of integers, indicates the initial locations (layout) of cars on the parking
-            desired_positions: a list of integers, indicates the desired locations (layout) of cars on the parking
+            start_positions:    a list of integers, indicates the initial locations (layout) of cars on the parking
+            desired_positions:  a list of integers, indicates the desired locations (layout) of cars on the parking
 
         Returns:
-            a boolean, indicates whether the generated rearrangement is valid (leads to desired cars' positions)
+            a boolean,  indicates whether the generated rearrangement is valid (leads to desired cars' positions)
             an integer, the number of moves performed
     """
     move_sequence = rearrange_cars(start_positions, desired_positions)
