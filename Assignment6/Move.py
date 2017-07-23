@@ -14,5 +14,5 @@ class Move:
     def get_end(self):
         return self.__end_spot
 
-    def pretty_print(self):
-        print "move from {} to {}".format(self.get_start(), self.get_end())
+    def __str__(self):
+        return "move from {} to {}".format(self.get_start(), self.get_end())
