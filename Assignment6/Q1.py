@@ -5,6 +5,8 @@
 
 from Move import Move
 
+_NO_CAR = 0
+
 
 def rearrange_cars(start_positions, desired_positions, print_sequence=False):
     """
@@ -78,8 +80,8 @@ def set_single_spot(spot, current_positions, position_map, desired_positions, mo
         return
     else:
         # The first move is to empty the spot. There is no need to empty the spot if it is already empty (not occupied).
-        if current_car != 0:
-            empty_spot = position_map[0]
+        if current_car != _NO_CAR:
+            empty_spot = position_map[_NO_CAR]
             make_move(car=current_car, start_spot=spot, end_spot=empty_spot, current_positions=current_positions,
                       position_map=position_map, moves=moves)
 
@@ -103,7 +105,7 @@ def make_move(car, start_spot, end_spot, current_positions, position_map, moves)
             moves:              a list of Move objects, sequence of the moves 'done so far'
     """
     moves.append(Move(start_spot, end_spot))
-    position_map[0] = start_spot
+    position_map[_NO_CAR] = start_spot
     position_map[car] = end_spot
-    current_positions[start_spot] = 0
+    current_positions[start_spot] = _NO_CAR
     current_positions[end_spot] = car
