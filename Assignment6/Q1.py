@@ -1,7 +1,9 @@
-"""The solution presented here goes through all parking spaces and 'places' on each of them the desired car (car which
-   on the particular space in the desired positions layout - second array). Because dictionary structure is used to
-   keep track of current cars' positions the runtime of the given solution is O(N) where N is the number of car and the
-   space used is also O(N)."""
+"""
+The solution presented here goes through all parking spaces and 'places' on each of them the desired car (car which
+on the particular space in the desired positions layout - second array). Because dictionary structure is used to
+keep track of current cars' positions the runtime of the given solution is O(N) where N is the number of car and the
+space used is also O(N).
+"""
 
 from Move import Move
 
@@ -67,8 +69,8 @@ def set_single_spot(spot, current_positions, position_map, desired_positions, mo
         Args:
             spot:               an integer, the parking space we want to set the car on
             current_positions:  a list of integers, indicates the current locations (layout) of cars on the parking
-            position_map:       a dictionary mapping integers to integers, cars' numbers are keys and cars' position on the
-                                parking are values
+            position_map:       a list of integers, Indicates the mapping of cars to their positions; ;ist index is
+                                corresponding to a car and the value is car's position.
             desired_positions:  a list of integers, indicates the desired locations (layout) of cars on the parking
             moves:              a list of Move objects, sequence of the moves 'done so far'
     """

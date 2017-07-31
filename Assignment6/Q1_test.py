@@ -92,18 +92,27 @@ class Q1Test(unittest.TestCase):
         # Generate all permutations of 5 cars on the parking.
         permutations_of_5 = list(permutations(range(_NUMBER_OF_CARS_TO_PERMUTE)))
         number_of_permutations = len(permutations_of_5)
+        moves_sum = 0
 
         for i in range(_NUMBER_OF_GENERATED_TESTS):
             # Randomly choose a pair of those permutations.
             start_positions = list(permutations_of_5[randint(0, number_of_permutations - 1)])
             end_positions = list(permutations_of_5[randint(0, number_of_permutations - 1)])
 
+            logger = logging.getLogger(__name__)
+            logger.info('Generating test: start positions = %s, end positions = %s',
+                        start_positions, end_positions)
+
             verify_result, number_of_moves = _test_result(start_positions, end_positions)
             self.assertTrue(verify_result)
+            self.assertTrue(verify_result)
 
-            logger = logging.getLogger(__name__)
-            logger.info('Generated test: start positions = %s, end positions = %s, number of moves performed = %s',
-                        start_positions, end_positions, number_of_moves)
+            logger.info('Test passed, number of moves performed = %s', number_of_moves)
+            moves_sum += number_of_moves
+
+        average_moves_number = float(moves_sum)/_NUMBER_OF_GENERATED_TESTS
+        logger.info('Average number of moves preformed in %s generated tests with %s cars to permute is: %s',
+                    _NUMBER_OF_GENERATED_TESTS, _NUMBER_OF_CARS_TO_PERMUTE, average_moves_number)
 
 
 if __name__ == '__main__':
